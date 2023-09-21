@@ -50,7 +50,6 @@ export default {
 
     // 表单初始化
     init() {
-      debugger
       if (this.$route.params && this.$route.params.id) {
         const id = this.$route.params.id
         this.fetchDataById(id)
@@ -104,7 +103,6 @@ export default {
     // 根据idSearch记录
     fetchDataById(id) {
       roleApi.getById(id).then(response => {
-        debugger
         this.role = response.data.item
       })
     }

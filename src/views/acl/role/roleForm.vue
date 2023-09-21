@@ -53,7 +53,6 @@ export default {
         menu.toAssign(roleId).then(response => {
             this.data = response.data.children
             var jsonList = JSON.parse(JSON.stringify(this.data))
-            debugger;
             var list = []
             this.getJsonToList(list, jsonList[0]['children'])
             console.log("最终集合")
@@ -96,7 +95,7 @@ export default {
           if(response.success){
               this.$message({
                 type:'success',
-                message:'Save成功'
+                message:'Success'
               })
               this.$router.push({ path: '/acl/role/list' })
             }
