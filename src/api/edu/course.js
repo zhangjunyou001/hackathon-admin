@@ -1,6 +1,6 @@
 import request from '@/utils/request'
 export default {
-    //1 添加课程信息
+    //1 Add课程信息
     addCourseInfo(courseInfo) {
         return request({
             url: '/eduservice/course/addCourseInfo',
@@ -8,14 +8,14 @@ export default {
             data: courseInfo
         })
     },
-    //查询所有讲师
+    //Search所有讲师
     getListTeacher() {
         return request({
             url: `/eduservice/teacher/findAll`,
             method: 'get',
         })
     },
-    //根据课程id查询课程基本信息
+    //根据课程idSearch课程基本信息
     getCourseInfoId(id) {
         return request({
             url: '/eduservice/course/getCourseInfo/' + id,
@@ -30,7 +30,7 @@ export default {
             data: courseInfo
         })
     },
-    //根据课程id查询
+    //根据课程idSearch
     updateCourseInfo(courseInfo) {
         return request({
             url: '/eduservice/course/getPublishCourseInfo' + id,

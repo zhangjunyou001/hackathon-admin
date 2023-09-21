@@ -1,20 +1,20 @@
 <template>
   <div class="app-container">
-    <!-- 查询表单 -->
-    <!--查询表单-->
+    <!-- Search表单 -->
+    <!--Search表单-->
     <el-form :inline="true" class="demo-form-inline">
       <el-form-item>
-         <el-input v-model="searchObj.username" placeholder="用户名"/>
+         <el-input v-model="searchObj.username" placeholder="User Name"/>
       </el-form-item>
 
-      <el-button type="primary" icon="el-icon-search" @click="fetchData()">查询</el-button>
-      <el-button type="default" @click="resetData()">清空</el-button>
+      <el-button type="primary" icon="el-icon-search" @click="fetchData()">Search</el-button>
+      <el-button type="default" @click="resetData()">Reset</el-button>
     </el-form>
 
     <!-- 工具条 -->
     <div>
-      <el-button type="danger" size="mini" @click="addUser()" v-if="hasPerm('user.add')">添加</el-button>
-      <el-button type="danger" size="mini" @click="removeRows()" v-if="hasPerm('user.remove')">批量删除</el-button>
+      <el-button type="danger" size="mini" @click="addUser()" v-if="hasPerm('user.add')">Add</el-button>
+      <el-button type="danger" size="mini" @click="removeRows()" v-if="hasPerm('user.remove')">Batch Delete</el-button>
 
     </div>
 
@@ -31,21 +31,21 @@
         width="55" />
 
       <el-table-column
-        label="序号"
-        width="70"
+        label="Sequense No"
+        width="150"
         align="center">
         <template slot-scope="scope">
           {{ (page - 1) * limit + scope.$index + 1 }}
         </template>
       </el-table-column>
 
-      <el-table-column prop="username" label="用户名" width="150" />
+      <el-table-column prop="username" label="User Name" width="150" />
 
-      <el-table-column prop="nickName" label="用户昵称" />
+      <el-table-column prop="nickName" label="User Nickname" />
 
-      <el-table-column prop="gmtCreate" label="创建时间" width="180"/>
+      <el-table-column prop="gmtCreate" label="Creation Time" width="180"/>
 
-      <el-table-column label="操作" width="230" align="center">
+      <el-table-column label="Action" width="230" align="center">
         <template slot-scope="scope">
           <router-link :to="'/acl/user/role/'+scope.row.id">
             <el-button type="info" size="mini" icon="el-icon-info" v-if="hasPerm('user.assgin')"></el-button>
@@ -83,7 +83,7 @@ export default {
       total: 0, // 数据库中的总记录数
       page: 1, // 默认页码
       limit: 10, // 每页记录数
-      searchObj: {}, // 查询表单对象
+      searchObj: {}, // Search表单对象
       multipleSelection: [] // 批量选择中选择的记录列表
     }
   },
@@ -114,7 +114,7 @@ export default {
 
     // 加载讲师列表数据
     fetchData(page = 1) {
-      console.log('翻页。。。' + page)
+      console.log('page。。。' + page)
       // 异步获取远程数据（ajax）
       this.page = page
 
@@ -129,9 +129,9 @@ export default {
       )
     },
 
-    // 重置查询表单
+    // 重置Search表单
     resetData() {
-      console.log('重置查询表单')
+      console.log('Reset form')
       this.searchObj = {}
       this.fetchData()
     },
@@ -139,25 +139,25 @@ export default {
     // 根据id删除数据
     removeDataById(id) {
       // debugger
-      this.$confirm('此操作将永久删除该记录, 是否继续?', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
+      this.$confirm('Persist the change?', 'Popup', {
+        confirmButtonText: 'Yes',
+        cancelButtonText: 'No',
         type: 'warning'
       }).then(() => { // promise
-        // 点击确定，远程调用ajax
+        // 点击Yes，远程调用ajax
         return user.removeById(id)
       }).then((response) => {
         this.fetchData(this.page)
         if (response.success) {
           this.$message({
             type: 'success',
-            message: '删除成功!'
+            message: 'Success!'
           })
         }
       }).catch(() => {
         this.$message({
           type: 'info',
-          message: '已取消删除'
+          message: 'Canceled'
         })
       })
     },
@@ -169,24 +169,24 @@ export default {
       this.multipleSelection = selection
     },
 
-    // 批量删除
+    // Batch Delete
     removeRows() {
       console.log('removeRows......')
 
       if (this.multipleSelection.length === 0) {
         this.$message({
           type: 'warning',
-          message: '请选择要删除的记录!'
+          message: 'Please select users to be deleted!'
         })
         return
       }
 
-      this.$confirm('此操作将永久删除该记录, 是否继续?', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
+      this.$confirm('Persist the change?', 'Alert', {
+        confirmButtonText: 'Yes',
+        cancelButtonText: 'No',
         type: 'warning'
       }).then(() => { // promise
-        // 点击确定，远程调用ajax
+        // 点击Yes，远程调用ajax
         // 遍历selection，将id取出放入id列表
         var idList = []
         this.multipleSelection.forEach(item => {
@@ -200,13 +200,13 @@ export default {
         if (response.success) {
           this.$message({
             type: 'success',
-            message: '删除成功!'
+            message: 'Success'
           })
         }
       }).catch(() => {
         this.$message({
           type: 'info',
-          message: '已取消删除'
+          message: 'Canceled'
         })
       })
     },

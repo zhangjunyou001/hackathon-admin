@@ -55,11 +55,11 @@ export default {
         },
         //上传成功
         fileUploadSuccess(response) {
-            //提示信息
+            //Alert信息
             this.loading = false
             this.$message({
                 type: 'success',
-                message: '添加课程分类成功'
+                message: 'Add课程分类成功'
             })
             //跳转课程分类列表
             //路由跳转
@@ -70,7 +70,7 @@ export default {
             this.loading = false
             this.$message({
                 type: 'error',
-                message: '添加课程分类失败'
+                message: 'Add课程分类失败'
             })
         }
     }

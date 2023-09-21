@@ -9,7 +9,7 @@
         highlight-current
         :props="defaultProps">
       </el-tree>
-    <el-button :disabled="saveBtnDisabled" type="primary" @click="save">保存</el-button>
+    <el-button :disabled="saveBtnDisabled" type="primary" @click="save">Save</el-button>
   </div>
 </template>
 <script>
@@ -96,7 +96,7 @@ export default {
           if(response.success){
               this.$message({
                 type:'success',
-                message:'保存成功'
+                message:'Save成功'
               })
               this.$router.push({ path: '/acl/role/list' })
             }

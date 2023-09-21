@@ -1,36 +1,36 @@
 <template>
   <div class="app-container">
     <el-form label-width="120px">
-      <el-form-item label="讲师名称">
+      <el-form-item label="Teacher Name">
         <el-input v-model="teacher.name" />
       </el-form-item>
-      <el-form-item label="讲师排序">
+      <el-form-item label="Teacher Order">
         <el-input-number v-model="teacher.sort" controls-position="right" min="0" />
       </el-form-item>
-      <el-form-item label="讲师头衔">
-        <el-select v-model="teacher.level" clearable placeholder="请选择">
+      <el-form-item label="Teacher Level">
+        <el-select v-model="teacher.level" clearable placeholder="Teacher Level">
           <!--
             数据类型一定要和取出的json中的一致，否则没法回填
             因此，这里value使用动态绑定的值，保证其数据类型是number
           -->
-          <el-option :value="1" label="高级讲师" />
-          <el-option :value="2" label="首席讲师" />
+          <el-option :value="1" label="Junior" />
+          <el-option :value="2" label="Senior" />
         </el-select>
       </el-form-item>
-      <el-form-item label="讲师资历">
+      <el-form-item label="Teacher Career">
         <el-input v-model="teacher.career" />
       </el-form-item>
-      <el-form-item label="讲师简介">
+      <el-form-item label="Teacher introduction">
         <el-input v-model="teacher.intro" :rows="10" type="textarea" />
       </el-form-item>
 
       <!-- 讲师头像：TODO -->
       <!-- 讲师头像 -->
-      <el-form-item label="讲师头像">
+      <el-form-item label="Teacher Avatar">
         <!-- 头衔缩略图 -->
         <pan-thumb :image="teacher.avatar" />
         <!-- 文件上传按钮 -->
-        <el-button type="primary" icon="el-icon-upload" @click="imagecropperShow=true">更换头像</el-button>
+        <el-button type="primary" icon="el-icon-upload" @click="imagecropperShow=true">Change Avatar</el-button>
 
         <!--
 v-show：是否显示上传组件
@@ -50,7 +50,7 @@ v-show：是否显示上传组件
         />
       </el-form-item>
       <el-form-item>
-        <el-button :disabled="saveBtnDisabled" type="primary" @click="saveOrUpdate">保存</el-button>
+        <el-button :disabled="saveBtnDisabled" type="primary" @click="saveOrUpdate">Save</el-button>
       </el-form-item>
     </el-form>
   </div>
@@ -76,7 +76,7 @@ export default {
       BASE_API: process.env.BASE_API, // 接口API地址
       imagecropperShow: false, // 是否显示上传组件
       imagecropperKey: 0, // 上传组件id
-      saveBtnDisabled: false // 保存按钮是否禁用,
+      saveBtnDisabled: false // Save按钮是否禁用,
     };
   },
 
@@ -114,18 +114,18 @@ export default {
         this.teacher = {};
       }
     },
-    //根据id查询讲师的信息
+    //根据idSearch讲师的信息
     getInfo(id) {
       teacherApi.getTeacherInfo(id).then(Response => {
         this.teacher = Response.data.teacher;
       });
     },
 
-    //判断是添加还是修改
+    //判断是Add还是修改
     saveOrUpdate() {
       //根据teacher判断是否有id
       if (!this.teacher.id) {
-        //没有id，添加
+        //没有id，Add
         this.saveTeacher();
       } else {
         this.updateTeacher();
@@ -137,20 +137,20 @@ export default {
       teacherApi.updateTeacher(this.teacher).then(Response => {
         this.$message({
           type: "success",
-          message: "修改成功"
+          message: "Success"
         });
         //回到列表页面，路由跳转
         this.$router.push({ path: "/teacher/table" });
       });
     },
-    //添加讲师的方法
+    //Add讲师的方法
     saveTeacher() {
       teacherApi.addTeacher(this.teacher).then(Response => {
-        //添加成功
-        //提示信息
+        //Add成功
+        //Alert信息
         this.$message({
           type: "success",
-          message: "添加成功!"
+          message: "Success!"
         });
         //回到列表页面，路由跳转
         this.$router.push({ path: "/teacher/table" });

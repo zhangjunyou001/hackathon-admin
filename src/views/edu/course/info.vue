@@ -91,7 +91,7 @@
       </el-form-item>
 
       <el-form-item>
-        <el-button :disabled="saveBtnDisabled" type="primary" @click="saveOrUpdate">保存并下一步</el-button>
+        <el-button :disabled="saveBtnDisabled" type="primary" @click="saveOrUpdate">Save并下一步</el-button>
       </el-form-item>
     </el-form>
   </div>
@@ -105,7 +105,7 @@ export default {
   components: { Tinymce },
   data() {
     return {
-      saveBtnDisabled: false, // 保存按钮是否禁用
+      saveBtnDisabled: false, // Save按钮是否禁用
       courseInfo: {
         title: "",
         subjectId: "", //二级分类id
@@ -128,7 +128,7 @@ export default {
     //获取路由id值
     if (this.$route.params && this.$route.params.id) {
       this.courseId = this.$route.params.id;
-      //调用根据id查询课程的方法
+      //调用根据idSearch课程的方法
       this.getInfo();
     } else {
       //初始化所有讲师
@@ -139,12 +139,12 @@ export default {
   },
 
   methods: {
-    //根据课程id查询
+    //根据课程idSearch
     getInfo() {
       course.getCourseInfoId(this.courseId).then(response => {
         //在courseInfo课程基本信息，包含 一级分类id 和 二级分类id
         this.courseInfo = response.data.courseInfoVo;
-        //1 查询所有的分类，包含一级和二级
+        //1 Search所有的分类，包含一级和二级
         subject.getSubjectList().then(response => {
           //2 获取所有一级分类
           this.subjectOneList = response.data.list;
@@ -191,30 +191,30 @@ export default {
         if (value === oneSubject.id) {
           //从一级分类获取里面所有的二级分类
           this.subjectTwoList = oneSubject.children;
-          //把二级分类id值清空
+          //把二级分类id值Reset
           this.courseInfo.subjectId = "";
         }
       }
     },
-    //查询所有的一级分类
+    //Search所有的一级分类
     getOneSubject() {
       subject.getSubjectList().then(response => {
         this.subjectOneList = response.data.list;
       });
     },
-    //查询所有的讲师
+    //Search所有的讲师
     getListTeacher() {
       course.getListTeacher().then(response => {
         this.teacherList = response.data.items;
       });
     },
-    //添加课程
+    //Add课程
     addCourse() {
       course.addCourseInfo(this.courseInfo).then(response => {
-        //提示
+        //Alert
         this.$message({
           type: "success",
-          message: "添加课程信息成功!"
+          message: "Add课程信息成功!"
         });
         //跳转到第二步
         this.$router.push({
@@ -225,7 +225,7 @@ export default {
     //修改课程
     updateCourse() {
       course.updateCourseInfo(this.courseInfo).then(response => {
-        //提示
+        //Alert
         this.$message({
           type: "success",
           message: "修改课程信息成功!"
@@ -235,9 +235,9 @@ export default {
       });
     },
     saveOrUpdate() {
-      //判断添加还是修改
+      //判断Add还是修改
       if (!this.courseInfo.id) {
-        //添加
+        //Add
         this.addCourse();
       } else {
         this.updateCourse();

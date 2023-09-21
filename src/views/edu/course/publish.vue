@@ -35,7 +35,7 @@ import course from "@/api/edu/course";
 export default {
   data() {
     return {
-      saveBtnDisabled: false, // 保存按钮是否禁用
+      saveBtnDisabled: false, // Save按钮是否禁用
       courseId: "",
       coursePublish: {}
     };
@@ -45,13 +45,13 @@ export default {
     //获取路由课程id值
     if (this.$route.params && this.$route.params.id) {
       this.courseId = this.$route.params.id;
-      //调用接口方法根据课程id查询
+      //调用接口方法根据课程idSearch
       this.getCoursePublishId();
     }
   },
 
   methods: {
-    //根据课程id查询
+    //根据课程idSearch
     getCoursePublishId() {
       course.getPublihCourseInfo(this.courseId).then(response => {
         this.coursePublish = response.data.publishCourse;
@@ -64,7 +64,7 @@ export default {
 
     publish() {
       course.publihCourse(this.courseId).then(response => {
-        //提示
+        //Alert
         this.$message({
           type: "success",
           message: "课程发布成功!"

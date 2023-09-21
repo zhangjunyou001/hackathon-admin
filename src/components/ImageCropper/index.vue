@@ -807,7 +807,7 @@ export default {
         } = this,
         fmData = new FormData()
       fmData.append(field, data2blob(createImgUrl, mime), field + '.' + imgFormat)
-      // 添加其他参数
+      // Add其他参数
       if (typeof params === 'object' && params) {
         Object.keys(params).forEach((k) => {
           fmData.append(k, params[k])

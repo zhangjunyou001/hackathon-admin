@@ -5,8 +5,8 @@
     <el-checkbox-group v-model="checkedCities" @change="handleCheckedCitiesChange">
         <el-checkbox v-for="city in cities" :label="city.id" :key="city.id">{{city.roleName}}</el-checkbox>
     </el-checkbox-group>
-    </br>
-    <el-button :disabled="saveBtnDisabled" type="primary" @click="update">保存</el-button>
+    <br>
+    <el-button :disabled="saveBtnDisabled" type="primary" @click="update">Save</el-button>
     
   </div>
 </template>
@@ -25,7 +25,7 @@ export default {
         cities: [], //所有的
         isIndeterminate: true,
         userId:'',
-        saveBtnDisabled: false // 保存按钮是否禁用,
+        saveBtnDisabled: false // Save按钮是否禁用,
       };
     },
     created () {
@@ -78,7 +78,7 @@ export default {
             if(response.success){
               this.$message({
                 type:'success',
-                message:'保存成功'
+                message:'Save成功'
               })
               this.$router.push({ path: '/acl/user/list' })
             }

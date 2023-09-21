@@ -7,7 +7,7 @@ export default {
             method: 'get'
           })
     },
-    //添加章节
+    //Add章节
     addChapter(chapter) {
         return request({
             url: '/eduservice/chapter/addChapter',
@@ -15,7 +15,7 @@ export default {
             data: chapter
           })
     },
-    //根据id查询章节
+    //根据idSearch章节
     getChapter(chapterId) {
         return request({
             url: '/eduservice/chapter/getChapterInfo/'+chapterId,

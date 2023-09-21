@@ -112,10 +112,10 @@ const user = {
       return new Promise((resolve, reject) => {
         logout(state.token).then(() => {
           debugger
-          commit('SET_TOKEN', '')// 清空前端vuex中存储的数据
-          commit('SET_ROLES', [])// 清空前端vuex中存储的数据
+          commit('SET_TOKEN', '')// Reset前端vuex中存储的数据
+          commit('SET_ROLES', [])// Reset前端vuex中存储的数据
           commit('SET_BUTTONS', [])
-          removeToken()// 清空cookie
+          removeToken()// Resetcookie
           resolve()
         }).catch(error => {
           reject(error)

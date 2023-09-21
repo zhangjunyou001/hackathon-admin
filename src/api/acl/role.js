@@ -8,7 +8,7 @@ export default {
         return request({
             url: `${api_name}/${page}/${limit}`,
             method: 'get',
-            params: searchObj // url查询字符串或表单键值对
+            params: searchObj // urlSearch字符串或表单键值对
         })
     },
     getById(id) {

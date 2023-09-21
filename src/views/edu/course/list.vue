@@ -1,7 +1,7 @@
 <template>
   <div class="app-container">
     课程列表
-    <!--查询表单-->
+    <!--Search表单-->
     <el-form :inline="true" class="demo-form-inline">
       <el-form-item>
         <el-input v-model="courseQuery.title" placeholder="课程名称" />
@@ -14,13 +14,13 @@
         </el-select>
       </el-form-item>
 
-      <el-button type="primary" icon="el-icon-search" @click="getList()">查询</el-button>
-      <el-button type="default" @click="resetData()">清空</el-button>
+      <el-button type="primary" icon="el-icon-search" @click="getList()">Search</el-button>
+      <el-button type="default" @click="resetData()">Reset</el-button>
     </el-form>
 
     <!-- 表格 -->
     <el-table :data="list" border fit highlight-current-row>
-      <el-table-column label="序号" width="70" align="center">
+      <el-table-column label="Sequense No" width="70" align="center">
         <template slot-scope="scope">{{ (page - 1) * limit + scope.$index + 1 }}</template>
       </el-table-column>
 
@@ -32,11 +32,11 @@
 
       <el-table-column prop="lessonNum" label="课时数" />
 
-      <el-table-column prop="gmtCreate" label="添加时间" width="160" />
+      <el-table-column prop="gmtCreate" label="Add时间" width="160" />
 
       <el-table-column prop="viewCount" label="浏览数量" width="60" />
 
-      <el-table-column label="操作" width="200" align="center">
+      <el-table-column label="Action" width="200" align="center">
         <template slot-scope="scope">
           <router-link :to="'/teacher/edit/'+scope.row.id">
             <el-button type="primary" size="mini" icon="el-icon-edit">编辑课程基本信息</el-button>
@@ -76,7 +76,7 @@ export default {
   data() {
     //定义变量和初始值
     return {
-      list: null, //查询之后接口返回集合
+      list: null, //Search之后接口返回集合
       page: 1, //当前页
       limit: 10, //每页记录数
       total: 0, //总记录数
@@ -90,19 +90,19 @@ export default {
   },
   methods: {
     removeCourseBy(id) {
-      this.$confirm("此操作将永久删除讲师记录, 是否继续?", "提示", {
-        confirmButtonText: "确定",
-        cancelButtonText: "取消",
+      this.$confirm("此Action将永久删除讲师记录, 是否继续?", "Alert", {
+        confirmButtonText: "Yes",
+        cancelButtonText: "No",
         type: "warning"
       }).then(() => {
-        //点击确定，执行then方法
+        //点击Yes，执行then方法
         //调用删除的方法
         course.removeCourse(id).then(response => {
           //删除成功
-          //提示信息
+          //Alert信息
           this.$message({
             type: "success",
-            message: "删除成功!"
+            message: "Success"
           });
           //回到列表页面
           this.getList();
@@ -126,10 +126,10 @@ export default {
           })//请求失败
     },
     resetData() {
-      //清空的方法
-      //表单输入项数据清空
+      //Reset的方法
+      //表单输入项数据Reset
       this.courseQuery = {};
-      //查询所有讲师数据
+      //Search所有讲师数据
       this.getList();
     }
   }

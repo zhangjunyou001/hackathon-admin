@@ -30,7 +30,7 @@
         :disabled="btnDisabled"
         type="primary"
         icon="el-icon-search"
-        @click="showChart()">查询</el-button>
+        @click="showChart()">Search</el-button>
     </el-form>
 
     <div class="chart-container">

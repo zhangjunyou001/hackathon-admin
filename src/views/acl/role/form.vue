@@ -1,11 +1,11 @@
 <template>
   <div class="app-container">
     <el-form ref="role" :model="role" :rules="validateRules" label-width="120px">
-      <el-form-item label="角色名称" prop="roleName">
+      <el-form-item label="Role Name" prop="roleName">
         <el-input v-model="role.roleName"/>
       </el-form-item>
     <el-form-item>
-        <el-button :disabled="saveBtnDisabled" type="primary" @click="saveOrUpdate">保存</el-button>
+        <el-button :disabled="saveBtnDisabled" type="primary" @click="saveOrUpdate">Save</el-button>
       </el-form-item>
     </el-form>
   </div>
@@ -23,7 +23,7 @@ export default {
   data() {
     return {
       role: defaultForm,
-      saveBtnDisabled: false, // 保存按钮是否禁用,
+      saveBtnDisabled: false, // Save按钮是否禁用,
       validateRules: {
         roleName: [{ required: true, trigger: 'blur', message: '角色名必须输入' }]
       }
@@ -101,7 +101,7 @@ export default {
       })
     },
 
-    // 根据id查询记录
+    // 根据idSearch记录
     fetchDataById(id) {
       roleApi.getById(id).then(response => {
         debugger

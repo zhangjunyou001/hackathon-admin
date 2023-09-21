@@ -1,24 +1,23 @@
 <template>
   <div class="app-container">
-      讲师列表
-          <!--查询表单-->
+          <!--Search表单-->
     <el-form :inline="true" class="demo-form-inline">
       <el-form-item>
-        <el-input v-model="teachQuery.name" placeholder="讲师名"/>
+        <el-input v-model="teachQuery.name" placeholder="Teacher Name"/>
       </el-form-item>
 
       <el-form-item>
-        <el-select v-model="teachQuery.level" clearable placeholder="讲师头衔">
-          <el-option :value="1" label="高级讲师"/>
-          <el-option :value="2" label="首席讲师"/>
+        <el-select v-model="teachQuery.level" clearable placeholder="Teacher Level">
+          <el-option :value="1" label="Junior"/>
+          <el-option :value="2" label="Senior"/>
         </el-select>
       </el-form-item>
 
-      <el-form-item label="添加时间">
+      <el-form-item label="Onboard Time">
         <el-date-picker
           v-model="teachQuery.begin"
           type="datetime"
-          placeholder="选择开始时间"
+          placeholder="Start Time"
           value-format="yyyy-MM-dd HH:mm:ss"
           default-time="00:00:00"
         />
@@ -27,14 +26,14 @@
         <el-date-picker
           v-model="teachQuery.end"
           type="datetime"
-          placeholder="选择截止时间"
+          placeholder="End Time"
           value-format="yyyy-MM-dd HH:mm:ss"
           default-time="00:00:00"
         />
       </el-form-item>
 
-      <el-button type="primary" icon="el-icon-search" @click="getList()">查询</el-button>
-      <el-button type="default" @click="resetData()">清空</el-button>
+      <el-button type="primary" icon="el-icon-search" @click="getList()">Search</el-button>
+      <el-button type="default" @click="resetData()">Reset</el-button>
     </el-form>
 
 
@@ -47,34 +46,34 @@
       highlight-current-row>
 
       <el-table-column
-        label="序号"
-        width="70"
+        label="Sequense No"
+        width="150"
         align="center">
         <template slot-scope="scope">
           {{ (page - 1) * limit + scope.$index + 1 }}
         </template>
       </el-table-column>
 
-      <el-table-column prop="name" label="名称" width="80" />
+      <el-table-column prop="name" label="Name" width="80" />
 
-      <el-table-column label="头衔" width="80">
+      <el-table-column label="Level" width="80">
         <template slot-scope="scope">
-          {{ scope.row.level===1?'高级讲师':'首席讲师' }}
+          {{ scope.row.level===1?'Junior':'Senior' }}
         </template>
       </el-table-column>
 
-      <el-table-column prop="intro" label="资历" />
+      <el-table-column prop="intro" label="Introduction" />
 
-      <el-table-column prop="gmtCreate" label="添加时间" width="160"/>
+      <el-table-column prop="gmtCreate" label="Creation Time" width="160"/>
 
-      <el-table-column prop="sort" label="排序" width="60" />
+      <el-table-column prop="sort" label="Sort" width="60" />
 
-      <el-table-column label="操作" width="200" align="center">
+      <el-table-column label="Action" width="200" align="center">
         <template slot-scope="scope">
           <router-link :to="'/teacher/edit/'+scope.row.id">
-            <el-button type="primary" size="mini" icon="el-icon-edit">修改</el-button>
+            <el-button type="primary" size="mini" icon="el-icon-edit">Edit</el-button>
           </router-link>
-          <el-button type="danger" size="mini" icon="el-icon-delete" @click="removeDataById(scope.row.id)">删除</el-button>
+          <el-button type="danger" size="mini" icon="el-icon-delete" @click="removeDataById(scope.row.id)">Delete</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -99,11 +98,11 @@ export default {
 
   data(){   //定义变量和函数值
     return{
-      list: null,//查询之后接口放回的集合
+      list: null,//Search之后接口放回的集合
       page: 1,//开始页
       limit: 10,//每页记录数
       total: 10,//总记录数
-      teachQuery: {},//查询条件    
+      teachQuery: {},//Search条件    
     }
   },
 
@@ -125,24 +124,24 @@ export default {
             console.log(error)
           })//请求失败
     },
-    resetData(){//清空的方法
-      //双向绑定输入框的数据清空
+    resetData(){//Reset的方法
+      //双向绑定输入框的数据Reset
       this.teachQuery = {}
       this.getList()
     },
 removeDataById(id) {
-            this.$confirm('此操作将永久删除讲师记录, 是否继续?', '提示', {
-                confirmButtonText: '确定',
-                cancelButtonText: '取消',
+            this.$confirm('Persist the change?', 'Alert', {
+                confirmButtonText: 'Yes',
+                cancelButtonText: 'No',
                 type: 'warning'
-            }).then(() => {  //点击确定，执行then方法
+            }).then(() => {  //点击Yes，执行then方法
                 //调用删除的方法
                 teacher.deleteTeacherId(id)
                     .then(response =>{//删除成功
-                    //提示信息
+                    //Alert信息
                     this.$message({
                         type: 'success',
-                        message: '删除成功!'
+                        message: 'Success'
                     });
                     //回到列表页面
                     this.getList()

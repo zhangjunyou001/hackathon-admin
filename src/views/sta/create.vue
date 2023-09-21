@@ -36,7 +36,7 @@ export default {
         create() {
             sta.createStaData(this.day)
                 .then(response => {
-                    //提示信息
+                    //Alert信息
                     this.$message({
                         type: 'success',
                         message: '生成数据成功!'

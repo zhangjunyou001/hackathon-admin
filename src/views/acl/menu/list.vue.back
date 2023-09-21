@@ -33,19 +33,19 @@
       label="权限值">
     </el-table-column>
     <el-table-column 
-      label="操作">
+      label="Action">
       <template slot-scope="scope">
       <!-- v-if="node.level == 1 || node.level == 2" v-if="node.level == 3" v-if="node.level == 4"-->
         <el-button
               v-if="(scope.row.level == 1 || scope.row.level == 2) && hasPerm('permission.add')"
               type="text"
               size="mini"
-              @click="() => {dialogFormVisible = true, menu.pid = scope.row.id}">添加菜单</el-button>
+              @click="() => {dialogFormVisible = true, menu.pid = scope.row.id}">Add菜单</el-button>
             <el-button
               v-if="scope.row.level == 3 &&  hasPerm('permission.add')"
               type="text"
               size="mini"
-              @click="() => {dialogPermissionVisible = true, permission.pid = scope.row.id}">添加功能</el-button>
+              @click="() => {dialogPermissionVisible = true, permission.pid = scope.row.id}">Add功能</el-button>
               <el-button
               v-if="scope.row.level == 4 &&  hasPerm('permission.update')"
               type="text"
@@ -82,8 +82,8 @@
             <el-button type="primary" @click="append()">确 定</el-button>
         </div>
     </el-dialog>
-    <!-- 添加功能的窗口 -->
-    <el-dialog :visible.sync="dialogPermissionVisible" title="添加功能">
+    <!-- Add功能的窗口 -->
+    <el-dialog :visible.sync="dialogPermissionVisible" title="Add功能">
         <el-form :model="menu" label-width="120px">
             <el-form-item label="功能名称">
                 <el-input v-model="permission.name"/>
@@ -137,7 +137,7 @@ export default {
         children: 'children',
         label: 'name'
       },
-      dialogFormValue:'添加菜单',
+      dialogFormValue:'Add菜单',
       dialogFormVisible: false,
       dialogPermissionVisible:false,
       menu: menuForm ,
@@ -171,9 +171,9 @@ export default {
     remove(data){
         console.log(data)
 
-        this.$confirm('此操作将永久删除该记录, 是否继续?', '提示', {
-            confirmButtonText: '确定',
-            cancelButtonText: '取消',
+        this.$confirm('Persist the change?', 'Alert', {
+            confirmButtonText: 'Yes',
+            cancelButtonText: 'No',
             type: 'warning'
         }).then(() => {
             return menu.removeById(data.id)
@@ -181,13 +181,13 @@ export default {
              this.fetchNodeList()// 刷新列表
             this.$message({
                 type: 'success',
-                message: '删除成功!'
+                message: 'Success'
             })
         }).catch((response) => { // 失败
             if (response === 'cancel') {
                 this.$message({
                     type: 'info',
-                    message: '已取消删除'
+                    message: 'Canceled'
                 })
             } else {
                 this.$message({
@@ -206,7 +206,7 @@ export default {
             this.dialogPermissionVisible = false
             this.$message({
                 type: 'success',
-                message: '添加功能成功'
+                message: 'Add功能成功'
             })
             //刷新页面
             this.fetchNodeList()
@@ -221,7 +221,7 @@ export default {
                 this.dialogFormVisible = false
                 this.$message({
                     type: 'success',
-                    message: '添加一级菜单成功'
+                    message: 'Add一级菜单成功'
                 })
                 //刷新页面
                 this.fetchNodeList()
@@ -229,23 +229,23 @@ export default {
                 this.permission = {...perForm}
             })
             .catch(response => {
-                //你们写：判断点击取消清空一下
+                //你们写：判断点击取消Reset一下
                 this.dialogFormVisible = false
                 this.$message({
                     type: 'error',
-                    message: '添加一级菜单失败'
+                    message: 'Add一级菜单失败'
                 })
                 this.menu = {...menuForm}
                 this.permission = {...perForm}
             })
     },
     append(){
-      if(!this.menu.id){// 添加
+      if(!this.menu.id){// Add
 
         if(this.menu.pid == 0 ){
-            this.appendLevelOne() // 一级分类的添加
+            this.appendLevelOne() // 一级分类的Add
         } else{
-            this.appendLevelTwo() // 二级分类的添加
+            this.appendLevelTwo() // 二级分类的Add
         }
       } else{ //修改
         this.update(this.menu)
@@ -259,7 +259,7 @@ export default {
         this.dialogFormVisible = false
           this.$message({
               type: 'success',
-              message: '修改成功'
+              message: 'Success'
           })
           //刷新页面
           this.fetchNodeList()
@@ -271,26 +271,26 @@ export default {
             .then(response => {
                 //1、把文本框关
                 this.dialogFormVisible = false
-                //2、提示成功
+                //2、Alert成功
                 this.$message({
                     type:'success',
-                    message:"添加二级分类成功"
+                    message:"Add二级分类成功"
                 })
                 //3、刷新页面
                 this.fetchNodeList()
-                //4、把menu清空
+                //4、把menuReset
                 this.menu = {...menuForm}
                 this.permission = {...perForm}
             })
             .catch(response => {
                 //1、把文本框关
                 this.dialogFormVisible = false
-                //2、提示成功
+                //2、Alert成功
                 this.$message({
                     type:'error',
-                    message:"添加二级分类失败"
+                    message:"Add二级分类失败"
                 })                
-                //3、把menu清空
+                //3、把menuReset
                 this.menu = {...menuForm}
                 this.permission = {...perForm}
                 

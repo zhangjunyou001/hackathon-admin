@@ -57,7 +57,7 @@ export default {
         this.loading = false;
         this.$message({
           type: "success",
-          message: "添加课程分类成功"
+          message: "Add课程分类成功"
         });
                 //回到列表页面，路由跳转
         this.$router.push({ path: "/subject/list" });
@@ -67,7 +67,7 @@ export default {
       this.loading = false;
       this.$message({
         type: "error",
-        message: "添加课程分类失败"
+        message: "Add课程分类失败"
       });
     }
   }
