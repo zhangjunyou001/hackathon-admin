@@ -64,7 +64,7 @@
 
       <el-table-column prop="intro" label="Introduction" />
 
-      <el-table-column prop="gmtCreate" label="Creation Time" width="160"/>
+      <el-table-column prop="gmtCreate" label="Onboard Time" width="160"/>
 
       <el-table-column prop="sort" label="Sort" width="60" />
 

@@ -5,7 +5,7 @@ export default {
 
     getTeacherListPage(current, limit, teachQuery) {
         return request({
-            url: `/eduservice/teacher/pageTeacherCondition/${current}/${limit}`,
+            url: `/eduservice/teacher/pageCondition/${current}/${limit}`,
             method: 'post',
             //teachQuery条件对象，后端用requestbody获取数据
             //data表示把对象转换成json数据传递到接口里面
